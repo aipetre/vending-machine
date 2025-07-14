@@ -160,7 +160,6 @@ export class VendingMachineState {
     const confirm = await this.rl.question('Are you sure you want to reset vending machine state? Type \'yes\' to confirm\n');
 
     if (confirm.match(/^yes$/i)) {
-      this.availableAmount = 0;
       this.earnedAmount = 0;
       this.costMatrix = defaultCostMatrix;
       this.inventory = defaultInventory;
