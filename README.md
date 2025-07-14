@@ -1,8 +1,8 @@
 # Getting Started
 
 ## Prerequisites
-Node.js@v20.16.0
-npm@10.8.1
+ * Node.js@v20.16.0
+ * npm@10.8.1
 
 ## Install dependencies
 ```
