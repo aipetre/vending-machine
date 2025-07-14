@@ -107,11 +107,16 @@ export class VendingMachineState {
     }
   }
 
+  private printAvailableAmount() {
+    console.log(`Available amount: ${displayAmount(this.availableAmount)}`);
+  }
+
   private async enterAdminMode() {
     const code = await this.rl.question('Please enter PIN code:\n');
 
     if (code !== this.ADMIN_PIN) {
-      this.rl.pause();
+      console.log('Invalid PIN code');
+      this.printAvailableAmount();
     } else {
       console.log('The vending machine is entering admin mode');
       this.setState(VendingMachineStateEnum.adminMode);
@@ -172,7 +177,7 @@ export class VendingMachineState {
   private async enterClientMode() {
     console.log('The vending machine is entering client mode');
     this.setState(VendingMachineStateEnum.clientMode);
-    console.log(`Available amount: ${displayAmount(this.availableAmount)}`);
+    this.printAvailableAmount();
   }
 
   private viewStocksAndBalance() {
@@ -197,7 +202,7 @@ export class VendingMachineState {
     try {
       const money = this.validateCoin(coin);
       this.availableAmount += money;
-      console.log(`Available amount: ${displayAmount(this.availableAmount)}`);
+      this.printAvailableAmount();
     } catch (error: unknown) {
       this.handleError(error);
     }
@@ -205,6 +210,7 @@ export class VendingMachineState {
 
   public constructor(rl: ReadlineInterface) {
     console.log(`Welcome to Ionut's Vending Machine`);
+    this.printAvailableAmount();
     this.rl = rl;
     this.state = VendingMachineStateEnum.clientMode;
   }

@@ -7,7 +7,6 @@ async function main() {
   const vm = new VendingMachineState(rl);
 
   rl.on('line', async (input) => {
-    console.log(`Received input: '${input}'`);
     await vm.handleInput(input);
   })
 
